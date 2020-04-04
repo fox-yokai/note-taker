@@ -1,66 +1,7 @@
 [
   {
-    "title": " Shopping List ",
-    "text": " 1. Bread "
-  },
-  {
-    "title": "morning",
-    "text": "right now"
-  },
-  {
-    "title": "morning",
-    "text": "right now"
-  },
-  {
-    "title": "after",
-    "text": "now"
-  },
-  {
-    "title": "test",
-    "text": "after changes"
-  },
-  {
-    "title": "elmo",
-    "text": "3 hours"
-  },
-  {
-    "title": "another",
-    "text": "test"
-  },
-  {
-    "title": "trash",
-    "text": "can"
-  },
-  {
-    "title": "commet",
-    "text": "stuff"
-  },
-  {
-    "title": "here",
-    "text": "let me fix this"
-  },
-  {
-    "title": "here we",
-    "text": "go"
-  },
-  {
-    "title": "balloon",
-    "text": "red\nyellow"
-  },
-  {
-    "title": "balloon",
-    "text": "red\nyellow"
-  },
-  {
-    "title": "note title",
-    "text": "note texts"
-  },
-  {
-    "title": "",
-    "text": ""
-  },
-  {
-    "title": "null test",
-    "text": "test"
+    "title": "Note Title",
+    "text": "Note Text",
+    "id": "e6b0f5e0-7611-11ea-9139-0b0010b86ffc"
   }
 ]

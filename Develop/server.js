@@ -6,6 +6,7 @@ const path = require("path");
 const fs = require("fs");
 
 const app = express();
+const uuidv1 = require('uuid/v1');
 
 const data = fs.readFileSync("./db/db.json", "utf8");
 
@@ -25,11 +26,11 @@ app.use(express.static("public"));
 
 
 app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "../Develop/public/index.html"));
+    res.sendFile(path.join(__dirname, "/public/index.html"));
   });
 
 app.get("/notes", function(req, res) {
-    res.sendFile(path.join(__dirname, "../Develop/public/notes.html"));
+    res.sendFile(path.join(__dirname, "/public/notes.html"));
   });
 
 // Create API routes to be created:
@@ -42,11 +43,13 @@ app.get("/api/notes", function(req, res) {
 // POST /api/notes - Should receive a new note to save on a request body
 app.post("/api/notes", function(req,res){
 
-  notesDB.push(req.body);
+  const { title, text } = req.body;
+  const newNote = { title, text, id: uuidv1() };
+
+  finalNotesDB.push(newNote);
 
   // take the combined data and write to the db.json file
-  //(notesDB, null, 2),
-  fs.writeFile("./db/db.json", JSON.stringify(notesDB, null, 2), function(error){
+  fs.writeFile("db/db.json", JSON.stringify(finalNotesDB, null, 2), function(error){
     if (error) {
       console.log(error);
     }
@@ -60,11 +63,16 @@ app.get("*", function(req, res) {
 });
 
 // DELETE /api/notes/:id
-app.delete('/api/tables/:Id', (req, res) => {
-    // Should receive a query parameter containering the id of a note to delete.
-    // This means you'll need to find a way to give each not a unique id when it's saved.
-    // In order to delete a note, you'll need to read all notes from the db.json file; remove the note with the given id property, and then rewrite the notes to the db.json file
-});
+app.delete('/api/notes/:id', function (req, res) {
+finalNotesDB.splice(req.params.id, 1)
+
+fs.writeFile("./db/db.json", JSON.stringify(finalNotesDB), function (err) {
+  if (err) {
+    throw err;
+  }
+})
+ res.json(true);
+})
 
 // LISTENER - starts the server
 app.listen(PORT, function() {
